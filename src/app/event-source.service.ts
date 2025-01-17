@@ -1,6 +1,7 @@
 import { Injectable, NgZone } from "@angular/core";
 import { Observable, Subscriber } from "rxjs";
 import { fetchEventSource } from '@microsoft/fetch-event-source';
+import { environment } from "../environments/environment";
 
 export interface Message {
     type: string;
@@ -25,7 +26,7 @@ export class EventSourceService {
         return new Observable((subscriber: Subscriber<Message>) => {
             fetchEventSource(url, {
                 headers: {
-                    Authorization: 'Bearer sdkfnuiskdjhafgeiut8435u93024uyqr237alweihdfsj'
+                    Authorization: environment.userType
                 },
                 onerror(error) {
                     self.zone.run(() => subscriber.error(error));
